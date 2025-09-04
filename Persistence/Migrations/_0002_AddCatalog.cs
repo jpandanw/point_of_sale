@@ -57,6 +57,7 @@ public class _0002_AddCatalog : Migration
             .WithColumn("quantity_change").AsInt32().NotNullable()
             .WithColumn("reason").AsInt32().NotNullable()
             .WithColumn("variant_id").AsGuid().ForeignKey("fk_product_inventory", "catalog", "variants", "id")
+            .WithColumn("created_by").AsGuid().ForeignKey("fk_inventory_user", "auth", "users", "id")
             .WithColumn("created_at").AsDateTime().NotNullable()
             .WithColumn("updated_at").AsDateTime().NotNullable();
     }
