@@ -11,6 +11,8 @@
     <ItemGroup>
         <PackageReference Include="FastEndpoints" Version="7.0.1"/>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.19"/>
+        <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
+        <PackageReference Include="SqlKata" Version="4.0.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
     </ItemGroup>
 
@@ -22,6 +24,12 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Persistence\Persistence.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="SqlKata.Execution">
+        <HintPath>..\..\..\.nuget\packages\sqlkata.execution\4.0.1\lib\net8.0\SqlKata.Execution.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

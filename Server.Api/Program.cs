@@ -1,5 +1,9 @@
 using Persistence;
 
+using Microsoft.Data.SqlClient;
+using SqlKata.Compilers;
+using SqlKata.Execution;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,7 +14,22 @@ builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+
 builder.Services.AddMigrationService(connectionString ?? "");
+
+builder.Services.AddTransient<QueryFactory>((_) => {
+
+    // In real life you may read the configuration dynamically
+    var connection = new SqlConnection(
+        connectionString
+    );
+
+    var compiler = new SqlServerCompiler();
+
+    return new QueryFactory(connection, compiler);
+
+});
+
 
 var app = builder.Build();
 
