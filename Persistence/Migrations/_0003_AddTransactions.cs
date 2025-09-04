@@ -17,7 +17,7 @@ public class _0003_AddSales :  Migration
             .WithColumn("created_at").AsDateTime().NotNullable()
             .WithColumn("updated_at").AsDateTime().NotNullable() ;
 
-        Create.Table("sale_items")
+        Create.Table("sale_items").InSchema("transactions")
             .WithColumn("product_id").AsGuid().ForeignKey("fk_sales_sale_item","catalog", "products", "id").NotNullable()
             .WithColumn("quantity").AsInt32().NotNullable()
             .WithColumn("sale_id").AsGuid().ForeignKey("fk_sale_items_sale","transactions", "sales", "id").NotNullable()
