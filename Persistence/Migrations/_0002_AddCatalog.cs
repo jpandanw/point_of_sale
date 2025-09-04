@@ -20,7 +20,7 @@ public class _0002_AddCatalog : Migration
             .WithColumn("id").AsGuid().PrimaryKey()
             .WithColumn("name").AsString(255).NotNullable()
             .WithColumn("description").AsString(255).NotNullable()
-            .WithColumn("category").AsGuid().ForeignKey("fk_product_categories", "catalog", "categories","id")
+            .WithColumn("category_id").AsGuid().ForeignKey("fk_product_categories", "catalog", "categories","id")
             .WithColumn("status").AsString(16).NotNullable()
             .WithColumn("created_at").AsDateTime().NotNullable()
             .WithColumn("updated_at").AsDateTime().NotNullable();
@@ -52,7 +52,7 @@ public class _0002_AddCatalog : Migration
             .WithColumn("price_modifier_id").AsGuid()
             .ForeignKey("fk_price_modifier_variant", "catalog", "price_modifiers", "id");
         
-        Create.Table("inventory").InSchema("catalog")
+        Create.Table("inventories").InSchema("catalog")
             .WithColumn("id").AsGuid().PrimaryKey()
             .WithColumn("quantity_change").AsInt32().NotNullable()
             .WithColumn("reason").AsInt32().NotNullable()
