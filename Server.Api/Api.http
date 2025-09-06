@@ -4,3 +4,12 @@ GET {{Api_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+POST {{Api_HostAddress}}/api/catalog/products/
+Content-Type: application/json
+
+{
+  "name": "Test Product",
+  "description" : "Fuck you"
+}
+

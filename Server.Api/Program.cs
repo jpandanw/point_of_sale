@@ -1,3 +1,5 @@
+using FastEndpoints;
+using Infrastructure.Db;
 using Persistence;
 
 using Microsoft.Data.SqlClient;
@@ -17,7 +19,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddMigrationService(connectionString ?? "");
 
-builder.Services.AddTransient<QueryFactory>((_) => {
+builder.Services.AddTransient<AppDbContext>((_) => {
 
     // In real life you may read the configuration dynamically
     var connection = new SqlConnection(
@@ -26,13 +28,20 @@ builder.Services.AddTransient<QueryFactory>((_) => {
 
     var compiler = new SqlServerCompiler();
 
-    return new QueryFactory(connection, compiler);
+    var qf = new QueryFactory(connection, compiler);
+
+    
+    return new AppDbContext(qf);
+
 
 });
 
 
+builder.Services.AddFastEndpoints();
+
 var app = builder.Build();
 
+app.UseFastEndpoints();
 
 using (var scope = app.Services.CreateScope())
 {
